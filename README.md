@@ -119,8 +119,7 @@ Anycubic'le de Rinkhals ekibiyle de bir ilgim yok, kendi yazıcım için yaptım
 bir şey olursa sorumluluk kabul etmiyorum, ama geri alma paketi bunun için var.
 
 [Rinkhals](https://github.com/rinkhals-community/Rinkhals) olmasa bunların hiçbiri
-olmazdı. Uygulama sistemini, ikili dosya yamalama yöntemini ve SWU paketlemeyi oradan
-öğrendim.
+olmazdı.Teşekkürler Rinkhals.
 
 Kod MIT lisanslı, çeviriler de öyle. Detay için [NOTICE](NOTICE).
 
