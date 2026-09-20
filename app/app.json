@@ -1,0 +1,18 @@
+{
+    "$version": "1",
+    "name": "Türkçe Arayüz",
+    "description": "Replaces the Italian screen language with Turkish (select 'Türkçe' in Settings > Language). Firmware updates restore Italian; the app re-applies Turkish at boot.",
+    "version": "1.0",
+    "url": "https://github.com/AtnNaz/KobraS1-Turkish-Languange-Pack",
+    "properties": {
+        "patch_label": {
+            "display": "Rename 'Italiano' menu entry to 'Türkçe' (restarts the screen UI once at boot)",
+            "type": "enum",
+            "options": [
+                "False",
+                "True"
+            ],
+            "default": "True"
+        }
+    }
+}

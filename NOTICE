@@ -1,0 +1,19 @@
+Kobra S1 Türkçe Arayüz
+Copyright (c) 2026 Atn Naz
+
+The MIT License in LICENSE applies to the code in this repository and to the
+Turkish translations in translations/tr.json.
+
+This repository does NOT redistribute any Anycubic file:
+
+- Anycubic's own translation files (Language*.qm) are not committed. The build
+  extracts the ones it needs from a stock firmware package that you supply
+  yourself (see tools/extract_stock.py).
+- The K3SysUi binary is never shipped. It is patched in place on the printer,
+  gated on a known MD5, following the approach used by the Rinkhals project.
+
+The generated Turkish translation file contains the English UI strings as
+translation keys, which is inherent to the Qt translation format.
+
+This project is not affiliated with, endorsed by, or supported by Anycubic or
+the Rinkhals project.

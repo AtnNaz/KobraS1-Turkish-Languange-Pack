@@ -1,0 +1,12 @@
+# Build inputs extracted from a stock Anycubic firmware (never committed)
+stock/
+translations/en_full.json
+
+# Build outputs
+dist/
+app/LanguageItaly.qm
+
+# Python / OS
+__pycache__/
+*.pyc
+.DS_Store

@@ -1,0 +1,61 @@
+name: Checks
+
+# Only checks that need no Anycubic firmware: the stock .qm files are not in
+# this repository, so the full build cannot run in CI.
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Translations are valid JSON and complete
+        run: |
+          python3 - <<'PY'
+          import json, re, sys
+          tr = json.load(open('translations/tr.json', encoding='utf-8'))
+          assert isinstance(tr, dict) and tr, 'tr.json must be a non-empty object'
+          bad = []
+          for src, dst in tr.items():
+              if dst is None or dst == '':
+                  continue
+              for ph in re.findall(r'%\d+|%n', src):
+                  if ph not in dst:
+                      bad.append(f'{src!r}: placeholder {ph} missing')
+          if bad:
+              print('\n'.join(bad)); sys.exit(1)
+          print(f'{len(tr)} translations OK')
+          PY
+
+      - name: App manifest matches the Rinkhals schema
+        run: |
+          python3 - <<'PY'
+          import json
+          m = json.load(open('app/app.json', encoding='utf-8'))
+          assert m.get('$version') == '1', '$version must be "1"'
+          for f in ('name', 'description', 'version'):
+              assert m.get(f), f'{f} is required'
+          print('app.json OK')
+          PY
+
+      - name: Python files compile
+        run: python3 -m compileall -q tools app
+
+      - name: Shell scripts parse
+        run: for f in app/app.sh tools/*.sh; do sh -n "$f"; done
+
+      - name: Shellcheck
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq shellcheck
+          shellcheck -e SC1091,SC2086 tools/*.sh || true
